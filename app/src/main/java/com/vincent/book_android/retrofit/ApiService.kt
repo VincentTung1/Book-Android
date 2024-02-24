@@ -17,11 +17,24 @@ interface ApiService {
                        @Field("author") author: String?,
                        @Field("year") year: String?): Call<Any>
 
+    @FormUrlEncoded
     @POST("/book")
     fun searchBooks(
-                @Field("id") id: String?,
+                @Field("bid") id: String?,
                 @Field("name") name: String?,
                 @Field("desc") desc: String?,
                 @Field("author") author: String?,
                 @Field("year") year: String?) : Call<ArrayList<Book>>
+
+    @FormUrlEncoded
+    @POST("/book/book-update")
+    fun updateBook(@Field("bid") id: Int?,
+                   @Field("name") name: String?,
+                   @Field("desc") desc: String?,
+                   @Field("author") author: String?,
+                   @Field("year") year: String?): Call<Any>
+
+    @FormUrlEncoded
+    @POST("/book/book-delete")
+    fun deleteBook(@Field("bid") id: Int?): Call<Any>
 }

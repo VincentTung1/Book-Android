@@ -5,6 +5,10 @@ interface MVPContract {
     interface MVPView{
 
        fun updateBooks(books: ArrayList<Book>)
+
+       fun toastSuccess()
+
+       fun toastFailed()
     }
 
     interface MVPPresenter {
@@ -15,10 +19,18 @@ interface MVPContract {
                 author: String?,
                 year: String?)
 
-        fun searchBooks(id: String?,
+        fun searchBooks(bid: Int?,
                        name: String?,
                        des: String?,
                        author: String?,
                        year: String?)
+
+        fun updateBook(bid: Int?,
+                       name: String?,
+                       desc: String?,
+                       author: String?,
+                       year: String?)
+
+        fun deleteBook(bid: Int?)
     }
 }

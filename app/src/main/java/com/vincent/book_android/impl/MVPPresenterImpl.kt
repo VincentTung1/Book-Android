@@ -23,11 +23,19 @@ class MVPPresenterImpl :  MVPContract.MVPPresenter{
     }
 
     override fun addBook(name: String?, desc: String?, author: String?, year: String?) {
-        api.addBook(name, desc,author,year)
+        api.addBook(name, desc,author,year).enqueue(object : Callback<Any>{
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                view.toastSuccess()
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                view.toastFailed()
+            }
+        })
     }
 
     override fun searchBooks(
-        id: String?,
+        id: Int?,
         name: String?,
         desc: String?,
         author: String?,
@@ -58,6 +66,36 @@ class MVPPresenterImpl :  MVPContract.MVPPresenter{
                 "1999"
             ))
         )
+    }
+
+    override fun updateBook(
+        bid: Int?,
+        name: String?,
+        desc: String?,
+        author: String?,
+        year: String?
+    ) {
+        api.updateBook(bid,name, desc,author,year).enqueue(object : Callback<Any>{
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                view.toastSuccess()
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                view.toastFailed()
+            }
+        })
+    }
+
+    override fun deleteBook(bid: Int?) {
+       api.deleteBook(bid).enqueue(object : Callback<Any>{
+           override fun onResponse(call: Call<Any>, response: Response<Any>) {
+               view.toastSuccess()
+           }
+
+           override fun onFailure(call: Call<Any>, t: Throwable) {
+               view.toastFailed()
+           }
+       })
     }
 
 }

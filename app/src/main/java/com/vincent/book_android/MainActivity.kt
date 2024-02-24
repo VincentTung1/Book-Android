@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.vincent.book_android.impl.MVPPresenterImpl
 import com.vincent.book_android.view.DataAdapter
@@ -45,6 +46,14 @@ class MainActivity : AppCompatActivity(),MVPContract.MVPView {
         adapter.updateList(books)
     }
 
+    override fun toastSuccess() {
+        Toast.makeText(this,"success!",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun toastFailed() {
+        Toast.makeText(this,"failed!",Toast.LENGTH_SHORT).show()
+    }
+
     fun add(view: View) {
         presenter.addBook(
             etName.text.toString(),
@@ -55,11 +64,22 @@ class MainActivity : AppCompatActivity(),MVPContract.MVPView {
 
     fun search(view: View){
         presenter.searchBooks(
-            etId.text.toString(),
+            if (etId.text.isEmpty()) -1 else etId.text.toString().toInt(),
             etName.text.toString(),
             etDesc.text.toString(),
             etAuthor.text.toString(),
             etYear.text.toString())
+    }
+
+    fun update(view: View) {
+        presenter.updateBook(if (etId.text.isEmpty()) -1 else etId.text.toString().toInt(),
+            etName.text.toString(),
+            etDesc.text.toString(),
+            etAuthor.text.toString(),
+            etYear.text.toString())
+    }
+    fun delete(view: View) {
+        presenter.deleteBook(if (etId.text.isEmpty()) -1 else etId.text.toString().toInt())
     }
 
 }
