@@ -15,9 +15,9 @@ interface MVPContract {
         fun init(view: MVPView)
 
         fun addBook(name: String?,
-                des: String?,
-                author: String?,
-                year: String?)
+                    desc: String?,
+                    author: String?,
+                    year: String?)
 
         fun searchBooks(bid: Int?,
                        name: String?,

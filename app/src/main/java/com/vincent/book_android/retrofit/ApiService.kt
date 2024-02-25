@@ -20,7 +20,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("/book")
     fun searchBooks(
-                @Field("bid") id: String?,
+                @Field("bid") id: Int?,
                 @Field("name") name: String?,
                 @Field("desc") desc: String?,
                 @Field("author") author: String?,
